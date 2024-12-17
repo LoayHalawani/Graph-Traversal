@@ -75,7 +75,6 @@ public class Graph {
 		graph.addEdge(5, 8);
 		graph.addEdge(7, 8);
 
-
 		System.out.print("BFS: ");
 
 		graph.BFS();
