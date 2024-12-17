@@ -42,8 +42,8 @@ public class Graph {
 	// DFS
 	private void DFS() {
 		visited = new ArrayList<>();
-		int v = adj.keySet().iterator().next();
-		DFSVisit(v);	
+		int firstVertex = adj.keySet().iterator().next();
+		DFSVisit(firstVertex);	
 	}
 
 	private void DFSVisit(int v) {
