@@ -5,11 +5,11 @@ public class Graph {
 	private Map<Integer, List<Integer>> adj;
 	List<Integer> visited;
 
-	// Undirected Graph
 	public Graph() {
 		adj = new HashMap<>();
 	}
 
+	// Undirected Graph
 	private void addEdge(int v, int u) {
 		adj.putIfAbsent(v, new ArrayList<>());
 		adj.putIfAbsent(u, new ArrayList<>());
