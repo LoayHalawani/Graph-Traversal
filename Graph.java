@@ -10,11 +10,11 @@ public class Graph {
 	}
 
 	// Undirected Graph
-	private void addEdge(int v, int u) {
-		adj.putIfAbsent(v, new ArrayList<>());
+	private void addEdge(int u, int v) {
 		adj.putIfAbsent(u, new ArrayList<>());
-		adj.get(v).add(u);
+		adj.putIfAbsent(v, new ArrayList<>());
 		adj.get(u).add(v);
+		adj.get(v).add(u);
 	}
 
 	// BFS
@@ -27,13 +27,13 @@ public class Graph {
 		queue.add(firstVertex);
 
 		while(!queue.isEmpty()) {
-			int v = queue.poll();
-			System.out.print(v + " ");
+			int u = queue.poll();
+			System.out.print(u + " ");
 
-			for(int u : adj.get(v)) {
-				if(!visited.contains(u)) {
-					visited.add(u);
-					queue.add(u);
+			for(int v : adj.get(u)) {
+				if(!visited.contains(v)) {
+					visited.add(v);
+					queue.add(v);
 				}
 			}
 		}
@@ -46,13 +46,13 @@ public class Graph {
 		DFSVisit(firstVertex);	
 	}
 
-	private void DFSVisit(int v) {
-		visited.add(v);
-		System.out.print(v + " ");
+	private void DFSVisit(int u) {
+		visited.add(u);
+		System.out.print(u + " ");
 
-		for(int u : adj.get(v)) {
-			if(!visited.contains(u)) {
-				DFSVisit(u);
+		for(int v : adj.get(u)) {
+			if(!visited.contains(v)) {
+				DFSVisit(v);
 			}
 		}
 	}
