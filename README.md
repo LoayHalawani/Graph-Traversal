@@ -2,7 +2,7 @@
 
 A Java implementation of graph traversal algortihms. Includes Breadth-First Search (BFS) and Depth-First Search (DFS).
 
-# How-to-run
+# Usage
 
 1. Clone the repository
 	- git clone https://github.com/LoayHalawani/Graph-Traversal.git
