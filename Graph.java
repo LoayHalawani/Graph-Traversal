@@ -85,9 +85,7 @@ public class Graph {
 
 		graph.BFS();
 
-		System.out.println();
-
-		System.out.print("DFS: ");
+		System.out.print("\nDFS: ");
 
 		graph.DFS();
 
