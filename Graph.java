@@ -2,37 +2,46 @@ import java.util.*;
 
 public class Graph {
 
-	private Map<Integer, List<Integer>> adj;
-	List<Integer> visited;
+	private List<Integer>[] adj;
+	private boolean[] visited;
 
-	public Graph() {
-		adj = new HashMap<>();
+	@SuppressWarnings("unchecked")
+	public Graph(int V) {
+		adj = new ArrayList[V];
+		for(int i = 0; i < adj.length; i ++) {
+			adj[i] = new ArrayList<>();
+		}
 	}
 
 	// Undirected Graph
 	private void addEdge(int u, int v) {
-		adj.putIfAbsent(u, new ArrayList<>());
-		adj.putIfAbsent(v, new ArrayList<>());
-		adj.get(u).add(v);
-		adj.get(v).add(u);
+		adj[u].add(v);
+		adj[v].add(u);
+	}
+
+	private void initializeVisited() {
+		visited = new boolean[adj.length];
+		for(int i = 0; i < visited.length; i ++) {
+			visited[i] = false;
+		}
 	}
 
 	// BFS
 	private void BFS() {
+		initializeVisited();
+
 		Queue<Integer> queue = new LinkedList<>();
-		visited = new ArrayList<>();
 		
-		int firstVertex = adj.keySet().iterator().next();
-		visited.add(firstVertex);
-		queue.add(firstVertex);
+		visited[0] = true;
+		queue.add(0);
 
 		while(!queue.isEmpty()) {
 			int u = queue.poll();
 			System.out.print(u + " ");
 
-			for(int v : adj.get(u)) {
-				if(!visited.contains(v)) {
-					visited.add(v);
+			for(int v : adj[u]) {
+				if(!visited[v]) {
+					visited[v] = true;
 					queue.add(v);
 				}
 			}
@@ -41,17 +50,16 @@ public class Graph {
 
 	// DFS
 	private void DFS() {
-		visited = new ArrayList<>();
-		int firstVertex = adj.keySet().iterator().next();
-		DFSVisit(firstVertex);	
+		initializeVisited();
+		DFSVisit(0);	
 	}
 
 	private void DFSVisit(int u) {
-		visited.add(u);
+		visited[u] = true;
 		System.out.print(u + " ");
 
-		for(int v : adj.get(u)) {
-			if(!visited.contains(v)) {
+		for(int v : adj[u]) {
+			if(!visited[v]) {
 				DFSVisit(v);
 			}
 		}
@@ -59,21 +67,19 @@ public class Graph {
 
 	// Driver
 	public static void main(String[] args) {
-		Graph graph = new Graph();
+		Graph graph = new Graph(8);
 
-		graph.addEdge(1, 2);
+		graph.addEdge(0, 1);
+		graph.addEdge(0, 3);
 		graph.addEdge(1, 4);
-		graph.addEdge(2, 5);
-		graph.addEdge(2, 7);
-		graph.addEdge(2, 8);
+		graph.addEdge(1, 6);
+		graph.addEdge(1, 7);
+		graph.addEdge(1, 2);
 		graph.addEdge(2, 3);
-		graph.addEdge(3, 4);
-		graph.addEdge(3, 10);
-		graph.addEdge(3, 9);
-		graph.addEdge(5, 6);
-		graph.addEdge(5, 7);
-		graph.addEdge(5, 8);
-		graph.addEdge(7, 8);
+		graph.addEdge(4, 5);
+		graph.addEdge(4, 6);
+		graph.addEdge(4, 7);
+		graph.addEdge(6, 7);
 
 		System.out.print("BFS: ");
 
